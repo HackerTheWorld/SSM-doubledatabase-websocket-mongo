@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cn.hnust.dao.VoyageEntityMapper">
+  <resultMap id="BaseResultMap" type="com.cn.hnust.pojo.VoyageEntity">
+    <id column="voyage_id" jdbcType="INTEGER" property="voyage_id" />
+    <result column="voyage_num" jdbcType="VARCHAR" property="voyage_num" />
+    <result column="voyage_models" jdbcType="VARCHAR" property="voyage_models" />
+    <result column="get_box_address" jdbcType="VARCHAR" property="get_box_address" />
+    <result column="in_return_box" jdbcType="VARCHAR" property="in_return_box" />
+    <result column="take_user_id" jdbcType="INTEGER" property="take_user_id" />
+    <result column="imgname" jdbcType="VARCHAR" property="imgname" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    voyage_id, voyage_num, voyage_models, get_box_address, in_return_box, take_user_id, 
+    imgname
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from voyage
+    where voyage_id = #{voyage_id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from voyage
+    where voyage_id = #{voyage_id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cn.hnust.pojo.VoyageEntity">
+    insert into voyage (voyage_id, voyage_num, voyage_models, 
+      get_box_address, in_return_box, take_user_id, 
+      imgname)
+    values (#{voyage_id,jdbcType=INTEGER}, #{voyage_num,jdbcType=VARCHAR}, #{voyage_models,jdbcType=VARCHAR}, 
+      #{get_box_address,jdbcType=VARCHAR}, #{in_return_box,jdbcType=VARCHAR}, #{take_user_id,jdbcType=INTEGER}, 
+      #{imgname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cn.hnust.pojo.VoyageEntity">
+    insert into voyage
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="voyage_id != null">
+        voyage_id,
+      </if>
+      <if test="voyage_num != null">
+        voyage_num,
+      </if>
+      <if test="voyage_models != null">
+        voyage_models,
+      </if>
+      <if test="get_box_address != null">
+        get_box_address,
+      </if>
+      <if test="in_return_box != null">
+        in_return_box,
+      </if>
+      <if test="take_user_id != null">
+        take_user_id,
+      </if>
+      <if test="imgname != null">
+        imgname,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="voyage_id != null">
+        #{voyage_id,jdbcType=INTEGER},
+      </if>
+      <if test="voyage_num != null">
+        #{voyage_num,jdbcType=VARCHAR},
+      </if>
+      <if test="voyage_models != null">
+        #{voyage_models,jdbcType=VARCHAR},
+      </if>
+      <if test="get_box_address != null">
+        #{get_box_address,jdbcType=VARCHAR},
+      </if>
+      <if test="in_return_box != null">
+        #{in_return_box,jdbcType=VARCHAR},
+      </if>
+      <if test="take_user_id != null">
+        #{take_user_id,jdbcType=INTEGER},
+      </if>
+      <if test="imgname != null">
+        #{imgname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cn.hnust.pojo.VoyageEntity">
+    update voyage
+    <set>
+      <if test="voyage_num != null">
+        voyage_num = #{voyage_num,jdbcType=VARCHAR},
+      </if>
+      <if test="voyage_models != null">
+        voyage_models = #{voyage_models,jdbcType=VARCHAR},
+      </if>
+      <if test="get_box_address != null">
+        get_box_address = #{get_box_address,jdbcType=VARCHAR},
+      </if>
+      <if test="in_return_box != null">
+        in_return_box = #{in_return_box,jdbcType=VARCHAR},
+      </if>
+      <if test="take_user_id != null">
+        take_user_id = #{take_user_id,jdbcType=INTEGER},
+      </if>
+      <if test="imgname != null">
+        imgname = #{imgname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where voyage_id = #{voyage_id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cn.hnust.pojo.VoyageEntity">
+    update voyage
+    set voyage_num = #{voyage_num,jdbcType=VARCHAR},
+      voyage_models = #{voyage_models,jdbcType=VARCHAR},
+      get_box_address = #{get_box_address,jdbcType=VARCHAR},
+      in_return_box = #{in_return_box,jdbcType=VARCHAR},
+      take_user_id = #{take_user_id,jdbcType=INTEGER},
+      imgname = #{imgname,jdbcType=VARCHAR}
+    where voyage_id = #{voyage_id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectPicURL" resultType="java.lang.String">
+  	select imgname
+  	from voyage
+  	<where>
+  		voyage_id = #{voyage_id}
+  	</where>
+  </select>
+  
+  
+  
+</mapper>

@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cn.hnust.dao.OlderEntityMapper">
+  <resultMap id="BaseResultMap" type="com.cn.hnust.pojo.OlderEntity">
+    <id column="kuaidi_id" jdbcType="INTEGER" property="kuaidi_id" />
+    <result column="kuaidi_num" jdbcType="VARCHAR" property="kuaidi_num" />
+    <result column="getorder_num" jdbcType="VARCHAR" property="getorder_num" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="person" jdbcType="VARCHAR" property="person" />
+    <result column="make_box_time" jdbcType="VARCHAR" property="make_box_time" />
+    <result column="order_num" jdbcType="VARCHAR" property="order_num" />
+    <result column="take_user_id" jdbcType="INTEGER" property="take_user_id" />
+    <result column="number" jdbcType="DOUBLE" property="number" />
+    <result column="v" jdbcType="DOUBLE" property="v" />
+    <result column="voyage_id" jdbcType="INTEGER" property="voyage_id" />
+    <result column="weight" jdbcType="DOUBLE" property="weight" />
+    <result column="make_box_address" jdbcType="VARCHAR" property="make_box_address" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    kuaidi_id, kuaidi_num, getorder_num, phone, person, make_box_time, order_num, take_user_id, 
+    number, v, voyage_id, weight, make_box_address, type
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from older
+    where kuaidi_id = #{kuaidi_id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from older
+    where kuaidi_id = #{kuaidi_id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cn.hnust.pojo.OlderEntity">
+    insert into older (kuaidi_id, kuaidi_num, getorder_num, 
+      phone, person, make_box_time, 
+      order_num, take_user_id, number, 
+      v, voyage_id, weight, 
+      make_box_address, type)
+    values (#{kuaidi_id,jdbcType=INTEGER}, #{kuaidi_num,jdbcType=VARCHAR}, #{getorder_num,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{person,jdbcType=VARCHAR}, #{make_box_time,jdbcType=VARCHAR}, 
+      #{order_num,jdbcType=VARCHAR}, #{take_user_id,jdbcType=INTEGER}, #{number,jdbcType=DOUBLE}, 
+      #{v,jdbcType=DOUBLE}, #{voyage_id,jdbcType=INTEGER}, #{weight,jdbcType=DOUBLE}, 
+      #{make_box_address,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cn.hnust.pojo.OlderEntity">
+    insert into older
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="kuaidi_id != null">
+        kuaidi_id,
+      </if>
+      <if test="kuaidi_num != null">
+        kuaidi_num,
+      </if>
+      <if test="getorder_num != null">
+        getorder_num,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="person != null">
+        person,
+      </if>
+      <if test="make_box_time != null">
+        make_box_time,
+      </if>
+      <if test="order_num != null">
+        order_num,
+      </if>
+      <if test="take_user_id != null">
+        take_user_id,
+      </if>
+      <if test="number != null">
+        number,
+      </if>
+      <if test="v != null">
+        v,
+      </if>
+      <if test="voyage_id != null">
+        voyage_id,
+      </if>
+      <if test="weight != null">
+        weight,
+      </if>
+      <if test="make_box_address != null">
+        make_box_address,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="kuaidi_id != null">
+        #{kuaidi_id,jdbcType=INTEGER},
+      </if>
+      <if test="kuaidi_num != null">
+        #{kuaidi_num,jdbcType=VARCHAR},
+      </if>
+      <if test="getorder_num != null">
+        #{getorder_num,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="person != null">
+        #{person,jdbcType=VARCHAR},
+      </if>
+      <if test="make_box_time != null">
+        #{make_box_time,jdbcType=VARCHAR},
+      </if>
+      <if test="order_num != null">
+        #{order_num,jdbcType=VARCHAR},
+      </if>
+      <if test="take_user_id != null">
+        #{take_user_id,jdbcType=INTEGER},
+      </if>
+      <if test="number != null">
+        #{number,jdbcType=DOUBLE},
+      </if>
+      <if test="v != null">
+        #{v,jdbcType=DOUBLE},
+      </if>
+      <if test="voyage_id != null">
+        #{voyage_id,jdbcType=INTEGER},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=DOUBLE},
+      </if>
+      <if test="make_box_address != null">
+        #{make_box_address,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cn.hnust.pojo.OlderEntity">
+    update older
+    <set>
+      <if test="kuaidi_num != null">
+        kuaidi_num = #{kuaidi_num,jdbcType=VARCHAR},
+      </if>
+      <if test="getorder_num != null">
+        getorder_num = #{getorder_num,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="person != null">
+        person = #{person,jdbcType=VARCHAR},
+      </if>
+      <if test="make_box_time != null">
+        make_box_time = #{make_box_time,jdbcType=VARCHAR},
+      </if>
+      <if test="order_num != null">
+        order_num = #{order_num,jdbcType=VARCHAR},
+      </if>
+      <if test="take_user_id != null">
+        take_user_id = #{take_user_id,jdbcType=INTEGER},
+      </if>
+      <if test="number != null">
+        number = #{number,jdbcType=DOUBLE},
+      </if>
+      <if test="v != null">
+        v = #{v,jdbcType=DOUBLE},
+      </if>
+      <if test="voyage_id != null">
+        voyage_id = #{voyage_id,jdbcType=INTEGER},
+      </if>
+      <if test="weight != null">
+        weight = #{weight,jdbcType=DOUBLE},
+      </if>
+      <if test="make_box_address != null">
+        make_box_address = #{make_box_address,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+    </set>
+    where kuaidi_id = #{kuaidi_id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cn.hnust.pojo.OlderEntity">
+    update older
+    set kuaidi_num = #{kuaidi_num,jdbcType=VARCHAR},
+      getorder_num = #{getorder_num,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      person = #{person,jdbcType=VARCHAR},
+      make_box_time = #{make_box_time,jdbcType=VARCHAR},
+      order_num = #{order_num,jdbcType=VARCHAR},
+      take_user_id = #{take_user_id,jdbcType=INTEGER},
+      number = #{number,jdbcType=DOUBLE},
+      v = #{v,jdbcType=DOUBLE},
+      voyage_id = #{voyage_id,jdbcType=INTEGER},
+      weight = #{weight,jdbcType=DOUBLE},
+      make_box_address = #{make_box_address,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER}
+    where kuaidi_id = #{kuaidi_id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectOlderByuserid" resultType="com.cn.hnust.pojo.OlderEntity">
+  	select 
+  	  voyage_id,kuaidi_num,getorder_num,
+  	  make_box_time,order_num
+  	 from older 
+  	 <where>
+  	 	take_user_id = #{user_id}
+  		<if test="f==&quot;1&quot; or f==&quot;0&quot;"> 
+  	 		and type = #{type}
+  	 	</if>
+  	 </where> 
+  	  limit #{count}, 7
+  </select>
+   
+   <select id="selectOlderByVoyageid" resultType="com.cn.hnust.pojo.OlderEntity">
+   	 select 
+   	 	getorder_num,number,weight,v,
+   	 	make_box_address,make_box_time,person,phone
+   	 	from older
+   	 	<where>
+   	 		voyage_id = #{voyage_id}
+   	 		and take_user_id = #{user_id}
+   	 	</where>
+   	 	limit #{count},5
+   </select>
+</mapper>

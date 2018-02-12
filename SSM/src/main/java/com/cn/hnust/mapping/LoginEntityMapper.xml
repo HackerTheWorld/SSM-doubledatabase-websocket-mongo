@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cn.hnust.dao.LoginEntityMapper">
+  <resultMap id="BaseResultMap" type="com.cn.hnust.pojo.LoginEntity">
+    <id column="login_ID" jdbcType="INTEGER" property="login_ID" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="user_id" jdbcType="INTEGER" property="user_id" />
+    <result column="token" jdbcType="VARCHAR" property="token" />
+    <result column="headimg" jdbcType="VARCHAR" property="headimg" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    login_ID, username, password, user_id, token, headimg
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from login
+    where login_ID = #{login_ID,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from login
+    where login_ID = #{login_ID,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cn.hnust.pojo.LoginEntity">
+    insert into login (login_ID, username, password, 
+      user_id, token, headimg
+      )
+    values (#{login_ID,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{user_id,jdbcType=INTEGER}, #{token,jdbcType=VARCHAR}, #{headimg,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cn.hnust.pojo.LoginEntity">
+    insert into login
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="login_ID != null">
+        login_ID,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="user_id != null">
+        user_id,
+      </if>
+      <if test="token != null">
+        token,
+      </if>
+      <if test="headimg != null">
+        headimg,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="login_ID != null">
+        #{login_ID,jdbcType=INTEGER},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="user_id != null">
+        #{user_id,jdbcType=INTEGER},
+      </if>
+      <if test="token != null">
+        #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="headimg != null">
+        #{headimg,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cn.hnust.pojo.LoginEntity">
+    update login
+    <set>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="user_id != null">
+        user_id = #{user_id,jdbcType=INTEGER},
+      </if>
+      <if test="token != null">
+        token = #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="headimg != null">
+        headimg = #{headimg,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where login_ID = #{login_ID,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cn.hnust.pojo.LoginEntity">
+    update login
+    set username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      user_id = #{user_id,jdbcType=INTEGER},
+      token = #{token,jdbcType=VARCHAR},
+      headimg = #{headimg,jdbcType=VARCHAR}
+    where login_ID = #{login_ID,jdbcType=INTEGER}
+  </update>
+  
+  <update id="changePassword">
+  	update login
+  		set password = #{arg0}
+  	where login_ID = #{arg1}
+  </update>
+  
+  <update id="updateUserinfo">
+  	update login
+  		set user_id=#{userid}
+  	<where>
+  		login_ID = #{loginid}
+  	</where>
+  </update>
+  
+  <select id="selectBytoken" resultType="com.cn.hnust.pojo.LoginEntity">
+  		select 
+    <include refid="Base_Column_List" />
+    from login
+    <where>
+    	token = #{arg0}
+    </where>
+  </select>
+  
+  <select id="selectByLogin" resultType="com.cn.hnust.pojo.LoginEntity">
+  	select
+  	<include refid="Base_Column_List" />
+  	from login
+  	<where>
+  		username = #{arg0} and password=#{arg1}
+  	</where>
+  </select>
+
+ <update id="updateheadimg">
+ 	update login
+ 	<set>
+ 		headimg = #{headimg}
+ 	</set>
+ 	<where>
+ 		user_id = #{userid}
+ 	</where>
+ </update>
+
+ <update id="inserttoken">
+ 	update login
+ 	<set>
+ 		token = #{token}
+ 	</set>
+ 	<where>
+ 		login_ID = #{loginid}
+ 	</where>
+ </update>
+ 
+ <select id="selectByToken" resultType="com.cn.hnust.pojo.LoginEntity">
+ 	select 
+ 	<include refid = "Base_Column_List"/>
+ 	from login
+ 	<where>
+ 		user_id = #{userid} and token = #{token}
+ 	</where>
+ </select>
+ 
+ <select id="selectHeadImg" resultType="com.cn.hnust.pojo.LoginEntity">
+	 	select headimg
+	 	from login
+ 	<where>
+ 		user_id = #{userid}
+ 	</where>
+ </select>
+ 
+</mapper>
